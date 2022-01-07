@@ -1,0 +1,1577 @@
+{
+  "description": "三角锥柱状图",
+  "name": "resafety-system-echart-riangularcone-bar",
+  "type": "echarts",
+  "version": "1.0.0",
+  "config": {
+    "main": {
+      "defaultAction": {
+        "create": true,
+        "@create": {
+          "name": "初始化创建",
+          "type": "boolean",
+          "layout": "group-name-behind"
+        },
+        "show": true,
+        "@show": {
+          "name": "初始化显示",
+          "comment": "如果初始化不创建，则当组件创建后默认该显示状态",
+          "type": "boolean",
+          "layout": "group-name-behind"
+        }
+      },
+      "@defaultAction": {
+        "name": "默认行为",
+        "comment": "初始化时默认执行的行为",
+        "type": "json",
+        "layout": [
+          1,
+          2
+        ]
+      },
+      "layout": {
+        "left": 100,
+        "@left": {
+          "name": "X",
+          "type": "int",
+          "unit": "px",
+          "layout": "group-name-bottom"
+        },
+        "top": 100,
+        "@top": {
+          "name": "Y",
+          "type": "int",
+          "unit": "px",
+          "layout": "group-name-bottom"
+        },
+        "width": 539,
+        "@width": {
+          "name": "宽度",
+          "type": "int",
+          "unit": "px",
+          "range": "[0, +∞)",
+          "layout": "group-name-bottom"
+        },
+        "height": 330,
+        "@height": {
+          "name": "高度",
+          "type": "int",
+          "unit": "px",
+          "range": "[0, +∞)",
+          "layout": "group-name-bottom"
+        }
+      },
+      "@layout": {
+        "name": "位置尺寸",
+        "type": "json",
+        "layout": [
+          2,
+          2
+        ]
+      },
+      "padding": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "@padding": {
+        "name": "内边距",
+        "type": "padding"
+      },
+      "backgroundColor": "#000000",
+      "@backgroundColor": {
+        "name": "背景色",
+        "type": "color"
+      },
+      "backgroundImage": "url(./xxx.png)",
+      "@backgroundImage": {
+        "name": "背景图",
+        "type": "image"
+      },
+      "zIndex": 2,
+      "@zIndex": {
+        "name": "层级",
+        "type": "int",
+        "range": "[0, 999]"
+      }
+    },
+    "@main": {
+      "name": "全局",
+      "comment": "全局样式，所有组件都具备的通用样式配置",
+      "type": "json",
+      "required": true,
+      "default": null,
+      "range": null,
+      "layout": "base-collapse"
+    },
+    "option": {
+      "barStyle": {
+        "style": "square",
+        "@style": {
+          "name": "样式",
+          "comment": "没找到echart对应项 ？？？",
+          "type": "string",
+          "range": [
+            {
+              "label": "方形",
+              "value": "square"
+            }
+          ]
+        },
+        "barWidth": 10,
+        "@barWidth": {
+          "name": "柱宽",
+          "comment": "=option.series[n].barWidth",
+          "type": "int",
+          "range": "[0, +∞)"
+        },
+        "gap": {
+          "barGap": "30%",
+          "@barGap": {
+            "name": "不同系列",
+            "comment": "不同系列的柱间距离  =option.series[n].barGap",
+            "type": "int",
+            "unit": "%",
+            "layout": "group-name-bottom"
+          },
+          "barCategoryGap": "20%",
+          "@barCategoryGap": {
+            "name": "同一系列",
+            "comment": "同一系列的柱间距离  =option.series[n].barCategoryGap",
+            "type": "int",
+            "unit": "%",
+            "layout": "group-name-bottom"
+          }
+        },
+        "@gap": {
+          "name": "柱间距",
+          "comment": "柱间距，无直接对应",
+          "type": "json",
+          "layout": [
+            1,
+            2
+          ]
+        },
+        "showBackground": true,
+        "@showBackground": {
+          "name": "显示背景色",
+          "comment": "是否显示背景色，没有对应项，但是可以通过option.series[n].backgroundStyle.color=透明来实现",
+          "type": "boolean"
+        },
+        "backgroundStyle": "rgba(149,149,149,0.1)",
+        "@backgroundStyle": {
+          "name": "背景色",
+          "comment": "背景色，=option.series[n].backgroundStyle.color",
+          "type": "color"
+        }
+      },
+      "@barStyle": {
+        "name": "柱状样式",
+        "comment": "没有对应，实际内容在 option.series[n]下，考虑去掉，每个系列定义自己的",
+        "type": "json",
+        "layout": "base-collapse"
+      },
+      "legend": {
+        "show": true,
+        "@show": {
+          "name": "是否显示",
+          "type": "boolean"
+        },
+        "orient": "horizontal",
+        "@orient": {
+          "name": "排列方式",
+          "type": "string",
+          "range": [
+            {
+              "label": "横排",
+              "value": "horizontal"
+            },
+            {
+              "label": "竖排",
+              "value": "vertical"
+            }
+          ]
+        },
+        "padding": "0px 0px 0px 0px",
+        "@padding": {
+          "name": "内边距",
+          "type": "padding"
+        },
+        "itemGap": 5,
+        "@itemGap": {
+          "name": "图例间距",
+          "type": "int"
+        },
+        "itemSize": 6,
+        "@itemSize": {
+          "name": "图例尺寸",
+          "type": "int"
+        },
+        "textStyle": {
+          "fontFamily": "Microsoft YaHei",
+          "fontSize": 12,
+          "fontWeight": "normal",
+          "fontStyle": "normal",
+          "color": "rgba(149,149,149,0.1)"
+        },
+        "@textStyle": {
+          "name": "文本样式",
+          "type": "font"
+        },
+        "layout": {
+          "show": false,
+          "@show": {
+            "name": "是否显示",
+            "type": "boolean"
+          },
+          "col": 1,
+          "@col": {
+            "name": "列数",
+            "type": "int"
+          },
+          "space": {
+            "row": 10,
+            "@row": {
+              "name": "行间距",
+              "type": "int",
+              "layout": "group-name-bottom"
+            },
+            "col": 10,
+            "@col": {
+              "name": "列间距",
+              "type": "int",
+              "layout": "group-name-bottom"
+            }
+          },
+          "@space": {
+            "name": "间距",
+            "type": "json",
+            "layout": [
+              1,
+              2
+            ]
+          },
+          "offset": {
+            "x": 0,
+            "@x": {
+              "name": "x偏移",
+              "type": "int",
+              "layout": "group-name-bottom"
+            },
+            "y": 0,
+            "@offset": {
+              "name": "y偏移",
+              "type": "int",
+              "layout": "group-name-bottom"
+            }
+          },
+          "@offset": {
+            "name": "偏移",
+            "type": "json",
+            "layout": [
+              1,
+              2
+            ]
+          }
+        },
+        "@layout": {
+          "name": "布局",
+          "type": "json",
+          "layout": "base-collapse"
+        }
+      },
+      "@legend": {
+        "name": "图列",
+        "comment": "对应option.legend",
+        "type": "json",
+        "layout": "base-collapse"
+      },
+      "tooltip": {
+        "axisPointer": {
+          "show": true,
+          "type": "line",
+          "backgroundColor": "rgba(149,149,149,0.1)",
+          "@show": {
+            "name": "是否显示",
+            "type": "boolean"
+          },
+          "@type": {
+            "name": "提示框类型",
+            "type": "string",
+            "range": [
+              {
+                "label": "线型",
+                "value": "line"
+              },
+              {
+                "label": "阴影",
+                "value": "shadow"
+              },
+              {
+                "label": "十字架",
+                "value": "cross"
+              },
+              {
+                "label": "无",
+                "value": "none"
+              }
+            ]
+          },
+          "@backgroundColor": {
+            "name": "提示框背景色",
+            "type": "color"
+          }
+        },
+        "@axisPointer": {
+          "name": "指示器",
+          "type": "json",
+          "layout": "base-collapse"
+        },
+        "tooltip": {
+          "show": false,
+          "@show": {
+            "name": "是否显示",
+            "type": "boolean"
+          },
+          "offset": {
+            "x": 0,
+            "@x": {
+              "name": "x轴偏移",
+              "type": "int",
+              "layout": "group-name-bottom"
+            },
+            "y": 0,
+            "@offset": {
+              "name": "y轴偏移",
+              "type": "int",
+              "layout": "group-name-bottom"
+            }
+          },
+          "@offset": {
+            "name": "偏移",
+            "type": "json",
+            "layout": [
+              1,
+              2
+            ]
+          },
+          "size": {
+            "width": 100,
+            "@width": {
+              "name": "宽度",
+              "type": "int",
+              "layout": "group-name-bottom"
+            },
+            "height": 100,
+            "@height": {
+              "name": "高度",
+              "type": "int",
+              "layout": "group-name-bottom"
+            }
+          },
+          "@size": {
+            "name": "尺寸",
+            "type": "json",
+            "layout": [
+              1,
+              2
+            ]
+          },
+          "padding": "0px 0px 0px 0px",
+          "@padding": {
+            "name": "尺寸",
+            "type": "padding"
+          },
+          "iconSize": 6,
+          "@iconSize": {
+            "name": "图标尺寸",
+            "type": "int"
+          }
+        },
+        "@tooltip": {
+          "name": "提示框",
+          "type": "json",
+          "layout": "base-collapse"
+        },
+        "title": {
+          "show": false,
+          "@show": {
+            "name": "是否显示",
+            "type": "boolean"
+          },
+          "content": "提示框标题1",
+          "@content": {
+            "name": "标题内容",
+            "type": "string"
+          },
+          "textStyle": {
+            "fontFamily": "Microsoft YaHei",
+            "fontSize": 12,
+            "fontWeight": "normal",
+            "fontStyle": "normal",
+            "color": "rgba(149,149,149,0.1)"
+          },
+          "@textStyle": {
+            "name": "文本样式",
+            "type": "font"
+          },
+          "offset": {
+            "x": 0,
+            "@x": {
+              "name": "x轴偏移",
+              "type": "int",
+              "layout": "group-name-bottom"
+            },
+            "y": 0,
+            "@offset": {
+              "name": "y轴偏移",
+              "type": "int",
+              "layout": "group-name-bottom"
+            }
+          },
+          "@offset": {
+            "name": "偏移",
+            "type": "json",
+            "layout": [
+              1,
+              2
+            ]
+          }
+        },
+        "@title": {
+          "name": "标题",
+          "type": "json",
+          "layout": "base-collapse"
+        },
+        "series": {
+          "textStyle": {
+            "fontFamily": "Microsoft YaHei",
+            "fontSize": 12,
+            "fontWeight": "normal",
+            "fontStyle": "normal",
+            "color": "rgba(149,149,149,0.1)"
+          },
+          "@textStyle": {
+            "name": "文本样式",
+            "type": "font"
+          },
+          "value": {
+            "show": false,
+            "@show": {
+              "name": "是否显示",
+              "type": "boolean"
+            },
+            "precision": 0,
+            "@precision": {
+              "name": "小数位数",
+              "type": "int"
+            },
+            "gap": 5,
+            "@gap": {
+              "name": "间距",
+              "type": "int"
+            },
+            "extendColor": true,
+            "@extendColor": {
+              "name": "颜色跟随",
+              "type": "boolean"
+            },
+            "textStyle": {
+              "fontFamily": "Microsoft YaHei",
+              "fontSize": 12,
+              "fontWeight": "normal",
+              "fontStyle": "normal",
+              "color": "rgba(149,149,149,0.1)"
+            },
+            "@textStyle": {
+              "name": "文本样式",
+              "type": "font"
+            }
+          },
+          "@value": {
+            "name": "数值",
+            "type": "json",
+            "layout": "base-collapse"
+          }
+        },
+        "@series": {
+          "name": "系列名",
+          "type": "json",
+          "layout": "base-collapse"
+        }
+      },
+      "@tooltip": {
+        "name": "提示框",
+        "comment": "对应option.tooltip",
+        "type": "json",
+        "layout": "base-collapse"
+      },
+      "xAxis": [
+        {
+          "show": true,
+          "@show": {
+            "name": "是否显示",
+            "type": "boolean"
+          },
+          "position": "bottom",
+          "@position": {
+            "name": "显示位置",
+            "type": "array",
+            "range": [
+              {
+                "label": "底部",
+                "value": "bottom"
+              },
+              {
+                "label": "顶部",
+                "value": "top"
+              }
+            ]
+          },
+          "type": "value",
+          "@type": {
+            "name": "轴类型",
+            "comment": "轴类型，[value,category,time,log], ==",
+            "type": "string",
+            "range": [
+              {
+                "label": "数值型",
+                "value": "value"
+              },
+              {
+                "label": "类目型",
+                "value": "category"
+              }
+            ]
+          },
+          "max": "dataMax",
+          "@max": {
+            "name": "最大值",
+            "type": "double",
+            "default": "dataMax"
+          },
+          "min": "dataMin",
+          "@min": {
+            "name": "最大值",
+            "type": "double",
+            "default": "dataMin"
+          },
+          "inverse": false,
+          "@inverse": {
+            "name": "是否反向",
+            "type": "boolean"
+          },
+          "axisLabel": {
+            "show": true,
+            "@show": {
+              "name": "是否显示",
+              "type": "boolean"
+            },
+            "offset": {
+              "x": 0,
+              "@x": {
+                "name": "x轴偏移",
+                "type": "int",
+                "layout": "group-name-bottom"
+              },
+              "y": 0,
+              "@offset": {
+                "name": "y轴偏移",
+                "type": "int",
+                "layout": "group-name-bottom"
+              }
+            },
+            "@offset": {
+              "name": "偏移",
+              "type": "json",
+              "layout": [
+                1,
+                2
+              ]
+            },
+            "view": {
+              "labelSize": 5,
+              "@labelSize": {
+                "name": "标签数量",
+                "type": "int",
+                "layout": "group-name-bottom"
+              },
+              "rotate": 0,
+              "@rotate": {
+                "name": "文字旋转角度",
+                "type": "int",
+                "layout": "group-name-bottom"
+              },
+              "textSize": 0,
+              "@textSize": {
+                "name": "字数限制",
+                "comment": "0或者不填，代表不限制",
+                "type": "int",
+                "layout": "group-name-bottom"
+              }
+            },
+            "@view": {
+              "name": "展示",
+              "type": "json",
+              "layout": [
+                1,
+                3
+              ]
+            },
+            "font": {
+              "fontFamily": "Microsoft YaHei",
+              "fontSize": 12,
+              "fontWeight": "normal",
+              "fontStyle": "normal",
+              "color": "rgba(149,149,149,0.1)"
+            },
+            "@font": {
+              "name": "文本样式",
+              "type": "font"
+            }
+          },
+          "@axisLabel": {
+            "name": "轴刻度标签",
+            "type": "json",
+            "layout": "base-collapse"
+          },
+          "axisLine": {
+            "show": false,
+            "@show": {
+              "name": "是否显示",
+              "type": "boolean",
+              "layout": [
+                1,
+                1
+              ]
+            },
+            "type": "solid",
+            "@type": {
+              "name": "线样式",
+              "type": "string",
+              "range": [
+                {
+                  "label": "实线",
+                  "value": "solid"
+                },
+                {
+                  "label": "虚线",
+                  "value": "dashed"
+                },
+                {
+                  "label": "点状虚线",
+                  "value": "dotted"
+                }
+              ]
+            },
+            "color": "rgba(149,149,149,0.1)",
+            "@color": {
+              "name": "颜色",
+              "type": "color"
+            },
+            "width": 1,
+            "@width": {
+              "name": "线宽",
+              "type": "int"
+            }
+          },
+          "@axisLine": {
+            "name": "轴线",
+            "type": "json",
+            "layout": "base-collapse"
+          },
+          "axisTick": {
+            "show": false,
+            "@show": {
+              "name": "是否显示",
+              "type": "boolean",
+              "layout": [
+                1,
+                1
+              ]
+            },
+            "type": "solid",
+            "@type": {
+              "name": "线样式",
+              "type": "string",
+              "range": [
+                {
+                  "label": "实线",
+                  "value": "solid"
+                },
+                {
+                  "label": "虚线",
+                  "value": "dashed"
+                },
+                {
+                  "label": "点状虚线",
+                  "value": "dotted"
+                }
+              ]
+            },
+            "color": "rgba(149,149,149,0.1)",
+            "@color": {
+              "name": "颜色",
+              "type": "color"
+            },
+            "size": {
+              "width": 1,
+              "@width": {
+                "name": "线宽",
+                "type": "int",
+                "layout": "group-name-bottom"
+              },
+              "length": 5,
+              "@length": {
+                "name": "线长",
+                "type": "int",
+                "layout": "group-name-bottom"
+              }
+            },
+            "@size": {
+              "name": "尺寸",
+              "type": "json",
+              "layout": [
+                1,
+                2
+              ]
+            },
+            "direction": "inside",
+            "@direction": {
+              "name": "刻度朝向",
+              "type": "string",
+              "range": [
+                {
+                  "label": "向内",
+                  "value": "inside"
+                },
+                {
+                  "label": "向外",
+                  "value": "outside"
+                }
+              ]
+            }
+          },
+          "@axisTick": {
+            "name": "轴刻度",
+            "type": "json",
+            "layout": "base-collapse"
+          },
+          "splitLine": {
+            "show": false,
+            "@show": {
+              "name": "是否显示",
+              "type": "boolean",
+              "layout": [
+                1,
+                1
+              ]
+            },
+            "type": "solid",
+            "@type": {
+              "name": "线样式",
+              "type": "string",
+              "range": [
+                {
+                  "label": "实线",
+                  "value": "solid"
+                },
+                {
+                  "label": "虚线",
+                  "value": "dashed"
+                },
+                {
+                  "label": "点状虚线",
+                  "value": "dotted"
+                }
+              ]
+            },
+            "color": "rgba(149,149,149,0.1)",
+            "@color": {
+              "name": "颜色",
+              "type": "color"
+            },
+            "width": 1,
+            "@width": {
+              "name": "线宽",
+              "type": "int"
+            }
+          },
+          "@splitLine": {
+            "name": "x轴网格线",
+            "type": "json",
+            "layout": "base-collapse"
+          },
+          "axisName": {
+            "show": false,
+            "@show": {
+              "name": "是否显示",
+              "type": "boolean",
+              "layout": [
+                1,
+                1
+              ]
+            },
+            "name": "名称1",
+            "@name": {
+              "name": "轴名称",
+              "type": "string"
+            },
+            "offset": {
+              "x": 0,
+              "@x": {
+                "name": "x轴偏移",
+                "type": "int",
+                "layout": "group-name-bottom"
+              },
+              "y": 0,
+              "@offset": {
+                "name": "y轴偏移",
+                "type": "int",
+                "layout": "group-name-bottom"
+              }
+            },
+            "@offset": {
+              "name": "偏移",
+              "type": "json",
+              "layout": [
+                1,
+                2
+              ]
+            },
+            "nameTextStyle": {
+              "fontFamily": "Microsoft YaHei",
+              "fontSize": 12,
+              "fontWeight": "normal",
+              "fontStyle": "normal",
+              "color": "rgba(149,149,149,0.1)"
+            },
+            "@nameTextStyle": {
+              "name": "文本样式",
+              "type": "font"
+            }
+          },
+          "@axisName": {
+            "name": "x轴名称",
+            "type": "json",
+            "layout": "base-collapse"
+          }
+        }
+      ],
+      "@xAxis": {
+        "name": "X轴",
+        "comment": "对应option.xAxis",
+        "type": "json",
+        "range": [
+          1
+        ],
+        "layout": "base-collapse"
+      },
+      "yAxis": [
+        {
+          "show": true,
+          "@show": {
+            "name": "是否显示",
+            "type": "boolean"
+          },
+          "position": "left",
+          "@position": {
+            "name": "显示位置",
+            "type": "string",
+            "range": [
+              {
+                "label": "左侧",
+                "value": "left"
+              },
+              {
+                "label": "右侧",
+                "value": "right"
+              }
+            ]
+          },
+          "type": "category",
+          "@type": {
+            "name": "轴类型",
+            "comment": "轴类型，[value,category,time,log], ==",
+            "type": "array",
+            "range": [
+              {
+                "label": "数值型",
+                "value": "value"
+              },
+              {
+                "label": "类目型",
+                "value": "category"
+              }
+            ]
+          },
+          "max": "dataMax",
+          "@max": {
+            "name": "最大值",
+            "type": "double",
+            "default": "dataMax"
+          },
+          "min": "dataMin",
+          "@min": {
+            "name": "最大值",
+            "type": "double",
+            "default": "dataMin"
+          },
+          "inverse": false,
+          "@inverse": {
+            "name": "是否反向",
+            "type": "boolean"
+          },
+          "axisLabel": {
+            "show": true,
+            "@show": {
+              "name": "是否显示",
+              "type": "boolean"
+            },
+            "offset": {
+              "x": 0,
+              "@x": {
+                "name": "x轴偏移",
+                "type": "int",
+                "layout": "group-name-bottom"
+              },
+              "y": 0,
+              "@offset": {
+                "name": "y轴偏移",
+                "type": "int",
+                "layout": "group-name-bottom"
+              }
+            },
+            "@offset": {
+              "name": "偏移",
+              "type": "json",
+              "layout": [
+                1,
+                2
+              ]
+            },
+            "view": {
+              "labelSize": 5,
+              "@labelSize": {
+                "name": "标签数量",
+                "type": "int",
+                "layout": "group-name-bottom"
+              },
+              "rotate": 0,
+              "@rotate": {
+                "name": "文字旋转角度",
+                "type": "int",
+                "layout": "group-name-bottom"
+              },
+              "textSize": 0,
+              "@textSize": {
+                "name": "字数限制",
+                "comment": "0或者不填，代表不限制",
+                "type": "int",
+                "layout": "group-name-bottom"
+              }
+            },
+            "@view": {
+              "name": "展示",
+              "type": "json",
+              "layout": [
+                1,
+                3
+              ]
+            },
+            "font": {
+              "fontFamily": "Microsoft YaHei",
+              "fontSize": 12,
+              "fontWeight": "normal",
+              "fontStyle": "normal",
+              "color": "rgba(149,149,149,0.1)"
+            },
+            "@font": {
+              "name": "文本样式",
+              "type": "font"
+            }
+          },
+          "@axisLabel": {
+            "name": "轴刻度标签",
+            "type": "json",
+            "layout": "base-collapse"
+          },
+          "axisLine": {
+            "show": false,
+            "@show": {
+              "name": "是否显示",
+              "type": "boolean",
+              "layout": [
+                1,
+                1
+              ]
+            },
+            "type": "solid",
+            "@type": {
+              "name": "线样式",
+              "type": "string",
+              "range": [
+                {
+                  "label": "实线",
+                  "value": "solid"
+                },
+                {
+                  "label": "虚线",
+                  "value": "dashed"
+                },
+                {
+                  "label": "点状虚线",
+                  "value": "dotted"
+                }
+              ]
+            },
+            "color": "rgba(149,149,149,0.1)",
+            "@color": {
+              "name": "颜色",
+              "type": "color"
+            },
+            "width": 1,
+            "@width": {
+              "name": "线宽",
+              "type": "int"
+            }
+          },
+          "@axisLine": {
+            "name": "轴线",
+            "type": "json",
+            "layout": "base-collapse"
+          },
+          "axisTick": {
+            "show": false,
+            "@show": {
+              "name": "是否显示",
+              "type": "boolean",
+              "layout": [
+                1,
+                1
+              ]
+            },
+            "type": "solid",
+            "@type": {
+              "name": "线样式",
+              "type": "string",
+              "range": [
+                {
+                  "label": "实线",
+                  "value": "solid"
+                },
+                {
+                  "label": "虚线",
+                  "value": "dashed"
+                },
+                {
+                  "label": "点状虚线",
+                  "value": "dotted"
+                }
+              ]
+            },
+            "color": "rgba(149,149,149,0.1)",
+            "@color": {
+              "name": "颜色",
+              "type": "color"
+            },
+            "size": {
+              "width": 1,
+              "@width": {
+                "name": "线宽",
+                "type": "int",
+                "layout": "group-name-bottom"
+              },
+              "length": 5,
+              "@length": {
+                "name": "线长",
+                "type": "int",
+                "layout": "group-name-bottom"
+              }
+            },
+            "@size": {
+              "name": "尺寸",
+              "type": "json",
+              "layout": [
+                1,
+                2
+              ]
+            },
+            "direction": "inside",
+            "@direction": {
+              "name": "刻度朝向",
+              "type": "string",
+              "range": [
+                {
+                  "label": "向内",
+                  "value": "inside"
+                },
+                {
+                  "label": "向外",
+                  "value": "outside"
+                }
+              ]
+            }
+          },
+          "@axisTick": {
+            "name": "轴刻度",
+            "type": "json",
+            "layout": "base-collapse"
+          },
+          "splitLine": {
+            "show": false,
+            "@show": {
+              "name": "是否显示",
+              "type": "boolean",
+              "layout": [
+                1,
+                1
+              ]
+            },
+            "type": "solid",
+            "@type": {
+              "name": "线样式",
+              "type": "string",
+              "range": [
+                {
+                  "label": "实线",
+                  "value": "solid"
+                },
+                {
+                  "label": "虚线",
+                  "value": "dashed"
+                },
+                {
+                  "label": "点状虚线",
+                  "value": "dotted"
+                }
+              ]
+            },
+            "color": "rgba(149,149,149,0.1)",
+            "@color": {
+              "name": "颜色",
+              "type": "color"
+            },
+            "width": 1,
+            "@width": {
+              "name": "线宽",
+              "type": "int"
+            }
+          },
+          "@splitLine": {
+            "name": "x轴网格线",
+            "type": "json",
+            "layout": "base-collapse"
+          },
+          "axisName": {
+            "show": false,
+            "@show": {
+              "name": "是否显示",
+              "type": "boolean",
+              "layout": [
+                1,
+                1
+              ]
+            },
+            "name": "名称1",
+            "@name": {
+              "name": "轴名称",
+              "type": "string"
+            },
+            "offset": {
+              "x": 0,
+              "@x": {
+                "name": "x轴偏移",
+                "type": "int",
+                "layout": "group-name-bottom"
+              },
+              "y": 0,
+              "@offset": {
+                "name": "y轴偏移",
+                "type": "int",
+                "layout": "group-name-bottom"
+              }
+            },
+            "@offset": {
+              "name": "偏移",
+              "type": "json",
+              "layout": [
+                1,
+                2
+              ]
+            },
+            "nameTextStyle": {
+              "fontFamily": "Microsoft YaHei",
+              "fontSize": 12,
+              "fontWeight": "normal",
+              "fontStyle": "normal",
+              "color": "rgba(149,149,149,0.1)"
+            },
+            "@nameTextStyle": {
+              "name": "文本样式",
+              "type": "font"
+            }
+          },
+          "@axisName": {
+            "name": "x轴名称",
+            "type": "json",
+            "layout": "base-collapse"
+          }
+        }
+      ],
+      "@yAxis": {
+        "name": "Y轴",
+        "comment": "对应option.xAxis",
+        "type": "[json]",
+        "range": [
+          1,
+          2
+        ],
+        "layout": "base-collapse"
+      },
+      "series": [
+        {
+          "name": "系列1",
+          "@name": {
+            "name": "系列名称",
+            "type": "string"
+          },
+          "yAxisIndex": 0,
+          "@yAxisIndex": {
+            "name": "对应y轴索引",
+            "type": "int"
+          },
+          "itemStyle": {
+            "color": "rgba(255,233,10,1)",
+            "@itemStyle": {
+              "name": "柱状颜色",
+              "type": "color"
+            },
+            "hightlight": "rgba(255,233,10,1)",
+            "@hightlight": {
+              "name": "高亮柱状颜色",
+              "type": "color"
+            }
+          },
+          "@itemStyle": {
+            "name": "极值高亮",
+            "type": "json",
+            "layout": "base-collapse"
+          },
+          "extremalHightlight": {
+            "show": false,
+            "@show": {
+              "name": "是否开启",
+              "type": "boolean"
+            },
+            "type": "max",
+            "@type": {
+              "name": "是否显示",
+              "type": "string",
+              "range": [
+                {
+                  "label": "最大值",
+                  "value": "max"
+                },
+                {
+                  "label": "最小值",
+                  "value": "min"
+                }
+              ]
+            }
+          },
+          "@extremalHightlight": {
+            "name": "极值高亮",
+            "type": "json",
+            "layout": "base-collapse"
+          },
+          "label": {
+            "show": true,
+            "@show": {
+              "name": "是否显示",
+              "type": "boolean"
+            },
+            "position": "top",
+            "@position": {
+              "name": "排列位置",
+              "type": "string",
+              "range": [
+                {
+                  "label": "顶部",
+                  "value": "top"
+                },
+                {
+                  "label": "左侧",
+                  "value": "left"
+                },
+                {
+                  "label": "右侧",
+                  "value": "right"
+                },
+                {
+                  "label": "底部",
+                  "value": "bottom"
+                },
+                {
+                  "label": "内部",
+                  "value": "inside"
+                },
+                {
+                  "label": "内部左侧",
+                  "value": "insideLeft"
+                },
+                {
+                  "label": "内部右侧",
+                  "value": "insideRight"
+                },
+                {
+                  "label": "内部顶部",
+                  "value": "insideTop"
+                },
+                {
+                  "label": "内部底部",
+                  "value": "insideBottom"
+                },
+                {
+                  "label": "内部左上角",
+                  "value": "insideTopLeft"
+                },
+                {
+                  "label": "内部左下角",
+                  "value": "insideBottomLeft"
+                },
+                {
+                  "label": "内部右上角",
+                  "value": "insideBottomRight"
+                },
+                {
+                  "label": "内部右下角",
+                  "value": "insideBottomRight"
+                }
+              ]
+            },
+            "offset": {
+              "x": 0,
+              "@x": {
+                "name": "x偏移",
+                "type": "int",
+                "layout": "group-name-bottom"
+              },
+              "y": 0,
+              "@offset": {
+                "name": "y偏移",
+                "type": "int",
+                "layout": "group-name-bottom"
+              }
+            },
+            "@offset": {
+              "name": "文字偏移",
+              "type": "json",
+              "layout": [
+                1,
+                2
+              ]
+            },
+            "textFix": {
+              "prefix": "No.",
+              "@prefix": {
+                "name": "前缀",
+                "type": "string",
+                "layout": "group-name-bottom"
+              },
+              "suffix": "/万人次",
+              "@suffix": {
+                "name": "后缀",
+                "type": "string",
+                "layout": "group-name-bottom"
+              }
+            },
+            "@textFix": {
+              "name": "文本前后缀",
+              "type": "json",
+              "layout": [
+                1,
+                2
+              ]
+            },
+            "textStyle": {
+              "fontFamily": "Microsoft YaHei",
+              "fontSize": 12,
+              "fontWeight": "normal",
+              "fontStyle": "normal",
+              "color": "rgba(149,149,149,0.1)"
+            },
+            "@textStyle": {
+              "name": "文本样式",
+              "type": "font"
+            }
+          },
+          "@label": {
+            "name": "数值标签",
+            "type": "json",
+            "layout": "base-collapse"
+          }
+        }
+      ],
+      "@series": {
+        "name": "系列",
+        "comment": "对应option.series",
+        "type": "[json]",
+        "range": [
+          1,
+          5
+        ],
+        "layout": "base-collapse"
+      },
+      "animation": {
+        "init": {
+          "show": true,
+          "animationEasing": "linear",
+          "animationDuration": 1000,
+          "animationDelay": 0,
+          "@show": {
+            "name": "开启动效",
+            "type": "boolean"
+          },
+          "@animationEasing": {
+            "name": "动效类型",
+            "type": "string"
+          },
+          "@animationDuration": {
+            "name": "停留时长",
+            "type": "int"
+          }
+        },
+        "@init": {
+          "name": "初始化动效",
+          "type": "json",
+          "layout": "base-collapse"
+        },
+        "carousel": {
+          "show": true,
+          "animationEasing": "highlight",
+          "animationDuration": 1000,
+          "@show": {
+            "name": "开启动效",
+            "type": "boolean"
+          },
+          "@animationEasing": {
+            "name": "动效类型",
+            "type": "string"
+          },
+          "@animationDuration": {
+            "name": "停留时长",
+            "type": "int"
+          }
+        },
+        "@carousel": {
+          "name": "轮播动效",
+          "type": "json",
+          "layout": "base-collapse"
+        }
+      },
+      "@animation": {
+        "name": "动画",
+        "type": "json",
+        "layout": "base-collapse"
+      }
+    },
+    "@option": {
+      "name": "配置项",
+      "type": "json",
+      "layout": "base-none"
+    },
+    "animation": {
+      "sence": {
+        "senceIn": {
+          "show": true,
+          "@show": {
+            "name": "开启动效",
+            "type": "boolean"
+          },
+          "animationEasing": "linear",
+          "@animationEasing": {
+            "name": "动效类型",
+            "type": "string"
+          }
+        },
+        "@senceIn": {
+          "name": "入场动画",
+          "type": "json",
+          "layout": "base-collapse"
+        },
+        "senceOut": {
+          "show": true,
+          "@show": {
+            "name": "开启动效",
+            "type": "boolean"
+          },
+          "animationEasing": "linear",
+          "@animationEasing": {
+            "name": "动效类型",
+            "type": "string"
+          }
+        },
+        "@senceOut": {
+          "name": "出场动画",
+          "type": "json",
+          "layout": "base-collapse"
+        }
+      },
+      "@sence": {
+        "name": "过场动画",
+        "comment": "组件进入画面和离开画面时的动画效果",
+        "type": "json",
+        "layout": "base-collapse"
+      }
+    },
+    "@animation": {
+      "name": "动画",
+      "comment": "没有直接对应关系",
+      "type": "json",
+      "layout": "base-collapse"
+    },
+    "state": []
+  },
+  "datasource": {
+    "dataset": [
+      {
+        "x": "深圳",
+        "series0": 16,
+        "series1": 13
+      },
+      {
+        "x": "北京",
+        "series0": 55,
+        "series1": 50
+      },
+      {
+        "x": "上海",
+        "series0": 42,
+        "series1": 31
+      },
+      {
+        "x": "广州",
+        "series0": 40,
+        "series1": 45
+      },
+      {
+        "x": "香港",
+        "series0": 40,
+        "series1": 48
+      }
+    ]
+  },
+  "event": {
+    "click": "单击",
+    "dblclick": "双击",
+    "mouseenter": "鼠标滑入",
+    "mouseleave": "鼠标滑出"
+  },
+  "action": {
+    "toggle": "切换显隐",
+    "show": "显示",
+    "hide": "隐藏"
+  }
+}
